@@ -35,8 +35,7 @@ function ts_myspacifyPerma(tries) {
 function ts_myspacifyTweet(tweet_txt) {
   console.log('found tweet');
   console.log(tweet_txt);
-  audio = document.getElementById('audio');
-  if (audio) audio.src = ''; // stop playback
+  ts_newAudio(false); // stop playback
   if (twitspaceOn) {
       $.getJSON("http://developer.echonest.com/api/v4/artist/extract?callback=test",
         {
@@ -66,26 +65,45 @@ function ts_playRandomSong(id) {
       {
         api_key: "N6E4NIOVYMTHNDM8J",
         artist_id: id,
-        results: 3,
+        results: 5,
         sort: "song_hotttnesss-desc",
         format: "json"
       },
       function(data) {
-          songmp3 = false;
           if (data.response.songs) {
-              theSong = data.response.songs[Math.floor(Math.random() * data.response.songs.length)];
-              if (theSong.tracks) {
-                  songmp3 = theSong.tracks[0].preview_url;
+              songmp3 = false;
+              tries = 0;
+              while (!songmp3 && tries <= data.response.songs.length) {
+                  randomIndex = Math.floor(Math.random() * data.response.songs.length);
+                  console.log("Picked random index "+randomIndex+" out of "+data.response.songs.length+" possible audio files");
+                  theSong = data.response.songs[randomIndex];
+                  if (theSong.tracks) {
+                    songmp3 = theSong.tracks[0].preview_url;
+                    ts_newAudio(songmp3);
+                  }
+                  else {
+                    console.log("No track for some reason");
+                  }
+                tries++;
               }
           }   
-          if (songmp3) {
-              audio = document.getElementById('audio');
-              if (!audio) {
-                  $('body').append('<audio id="audio" src="" autoplay="true" loop="true">');
-                  audio = document.getElementById('audio');
-              }
-              audio.src = songmp3;
-          }
       }
   );
+}
+
+function ts_newAudio(mp3) {
+    // rip it up and start again
+    audio = document.getElementById('audio');
+    if (!audio) {
+        $('body').append('<audio id="audio" src="" loop="true">');
+        audio = document.getElementById('audio');
+    }
+    if (mp3) {
+        audio.src = mp3;
+        audio.play();
+        console.log("Loading/playing "+mp3);
+    } else {
+        audio.pause();
+        console.log("Stopped audio");
+    }
 }
