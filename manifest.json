@@ -1,0 +1,17 @@
+{
+  "name": "TwitSpace",
+  "version": "1.0",
+  "description": "Bring a bit of that ol' Myspace magic to any tweet that mentions a band/artist name.",
+  "browser_action": {
+    "default_icon": "icon.png", 
+    "default_title": "Activate TwitSpace",
+	"default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://twitter.com/*"],
+      "css": ["twitspace.css"],
+      "js": ["twitspace.js"]
+    }
+  ]
+}
