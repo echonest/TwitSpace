@@ -1,5 +1,4 @@
 var twitspaceOn;
-var songmp3;
 
 $(function() {
     
@@ -12,14 +11,13 @@ $(function() {
         ts_myspacifyTweet($(this).find(".tweet-text").text());
   });
   
-  if (window.location.hash.indexOf("status") != -1) {
+  if (window.location.hash.indexOf("status") != -1 || window.location.href.indexOf("status") != -1) {
       ts_myspacifyPerma(0);
   }
   
 }());
 
 function ts_myspacifyPerma(tries) {
-  if (!twitspaceOn) return false;
   var $permas = $('.permalink-tweet');
   console.log("Permacheck "+tries);
       if ($permas.length) {
@@ -95,7 +93,6 @@ function ts_playRandomSong(id) {
       function(data) {
           songmp3 = false;
           if (data.response.songs) {
-            songmp3 = false;
             tries = 0;
             while (!songmp3 && tries <= data.response.songs.length) {
                 randomIndex = Math.floor(Math.random() * data.response.songs.length);
