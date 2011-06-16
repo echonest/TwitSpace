@@ -84,10 +84,12 @@ function ts_myspacifyTweet(tweet_txt) {
            },
            function(data) {
              var body_image = data.images.image[0].sizes.size[5]['#text'];
-             var details_image = data.images.image[1].sizes.size[2]['#text'];
+             var details_image_1 = data.images.image[1].sizes.size[2]['#text'];
+             var details_image_2 = data.images.image[2].sizes.size[2]['#text'];
+             var details_image_3 = data.images.image[3].sizes.size[2]['#text'];
              $('body').css("background", "url(" + body_image + ") center center repeat").addClass('myspacerized');
              setTimeout(function(){
-               $('.details-pane-tweet .tweet-text').append("<img src=\"" + details_image + "\" class=\"details_image\" />");
+               $('.details-pane-tweet .tweet-text').append("<div id=\"slideshow\"><img src=\"" + details_image_1 + "\" class=\"details_image\" id=\"slideshow-image-1\" /><img src=\"" + details_image_2 + "\" class=\"details_image\" id=\"slideshow-image-2\" /><img src=\"" + details_image_3 + "\" class=\"details_image\" id=\"slideshow-image-3\" /></div>");
              }, 1000);
            });
     });
