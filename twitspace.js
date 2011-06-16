@@ -42,42 +42,52 @@ function ts_myspacifyTweet(tweet_txt) {
       text: tweet_txt,
       results: 10,
       sort: "familiarity-desc",
+      min_familiarity: "0.6",
       format: "json"
     },
     function(data) {
-      var artist = data.response.artists[0].name;
-      var id = data.response.artists[0].id;
-      console.log(artist);
+      var artists = data.response.artists;
 
-      if (artist) {
-        var image = "http://ws.audioscrobbler.com/2.0/?method=artist.getimageredirect&artist=" + encodeURI(artist) + "&api_key=b25b959554ed76058ac220b7b2e0a026&size=mega";
-        console.log(image);
-        $('body').css("background", "url(" + image + ") center center repeat").addClass('myspacerized');
-        
-        // play that funky music
-        ts_playRandomSong(id);
-        
-        // highlight text
-         var re = new RegExp(artist,"i");
-         $('.focused-stream-item .tweet-text').html($('.focused-stream-item .tweet-text').html().replace(re,function (matched) {return "<span class=\"highlight\">"+matched+"</span>";}));
-         
-         // citrus fiesta
-         $.getJSON("http://ws.audioscrobbler.com/2.0/",
-             {
-               api_key: "b25b959554ed76058ac220b7b2e0a026",
-               artist: artist,
-               method: "artist.getImages",
-               format: "json"
-             },
-             function(data) {
-               var body_image = data.images.image[0].sizes.size[5]['#text'];
-               var details_image = data.images.image[1].sizes.size[2]['#text'];
-               $('body').css("background", "url(" + body_image + ") center center repeat").addClass('myspacerized');
-               setTimeout(function(){
-                 $('.details-pane-tweet .tweet-text').append("<img src=\"" + details_image + "\" class=\"details_image\" />");
-               }, 1000); 
-             });
-         }
+      console.log(artists.length);
+      console.log(artists.length === 0);
+
+      if (artists.length === 0) {
+        $('body').removeClass('myspacerized').css("background-image", "inherit");
+        return;
+      }
+      
+      var artist = data.response.artists[0].name;
+      console.log(artist);
+      console.log("----");
+      var id = data.response.artists[0].id;
+
+      var image = "http://ws.audioscrobbler.com/2.0/?method=artist.getimageredirect&artist=" + encodeURI(artist) + "&api_key=b25b959554ed76058ac220b7b2e0a026&size=mega";
+      console.log(image);
+      $('body').css("background", "url(" + image + ") center center repeat").addClass('myspacerized');
+      
+      // play that funky music
+      ts_playRandomSong(id);
+      
+      // highlight text
+       var re = new RegExp(artist,"i");
+       $('.focused-stream-item .tweet-text').html($('.focused-stream-item .tweet-text').html().replace(re,function (matched) {return "<span class=\"highlight\">"+matched+"</span>";}));
+       
+       // citrus fiesta
+       $.getJSON("http://ws.audioscrobbler.com/2.0/",
+           {
+             api_key: "b25b959554ed76058ac220b7b2e0a026",
+             artist: artist,
+             method: "artist.getImages",
+             format: "json"
+           },
+           function(data) {
+             var body_image = data.images.image[0].sizes.size[5]['#text'];
+             var details_image = data.images.image[1].sizes.size[2]['#text'];
+             $('body').css("background", "url(" + body_image + ") center center repeat").addClass('myspacerized');
+             setTimeout(function(){
+               $('.details-pane-tweet .tweet-text').append("<img src=\"" + details_image + "\" class=\"details_image\" />");
+             }, 1000);
+           });
     });
 }
 
