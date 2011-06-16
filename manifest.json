@@ -1,5 +1,11 @@
 {
   "name": "TwitSpace",
+  "permissions": [
+		"tabs",
+	    "http://twitter.com/",
+		"http://developer.echonest.com/",
+		"http://ws.audioscrobbler.com/"
+	],
   "version": "1.0",
   "description": "Bring a bit of that ol' Myspace magic to any tweet that mentions a band/artist name.",
   "browser_action": {
@@ -13,5 +19,5 @@
       "js": ["jquery-1.6.1.min.js","twitspace.js"]
     }
   ],
-	"background_page": "background.html"
+  "background_page": "background.html"
 }
