@@ -69,8 +69,10 @@ function ts_myspacifyTweet(tweet_txt) {
       ts_playRandomSong(id);
       
       // highlight text
-       var re = new RegExp(artist,"i");
-       $('.focused-stream-item .tweet-text').html($('.focused-stream-item .tweet-text').html().replace(re,function (matched) {return "<span class=\"highlight\">"+matched+"</span>";}));
+      if($('.focused-stream-item .tweet-text').length > 0) {
+        var re = new RegExp(artist,"i");
+        $('.focused-stream-item .tweet-text').html($('.focused-stream-item .tweet-text').html().replace(re,function (matched) {return "<span class=\"highlight\">"+matched+"</span>";}));
+      }
        
        // citrus fiesta
        $.getJSON("http://ws.audioscrobbler.com/2.0/",

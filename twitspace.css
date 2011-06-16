@@ -4,9 +4,14 @@
 .myspacerized .details-pane,
 body.narrow.myspacerized .details-pane-tweet,
 body.narrow.myspacerized .details-pane .pane-components-inner {
-  background: rgba(255, 255, 255, 0) !important;
+  background: transparent !important;
   -webkit-box-shadow: none;
   box-shadow: none !important;
+}
+
+.myspacerized #page-container,
+.myspacerized .permalink {
+  background: rgba(255, 255, 255, 0.8) !important;
 }
 
 .myspacerized .focused-stream-item {
