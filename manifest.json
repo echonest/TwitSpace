@@ -12,5 +12,6 @@
       "css": ["twitspace.css"],
       "js": ["jquery-1.6.1.min.js","twitspace.js"]
     }
-  ]
+  ],
+	"background_page": "background.html"
 }
