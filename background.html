@@ -1,0 +1,33 @@
+<html>
+<body>
+  <script type="text/javascript">
+    var twitspaceOn = true;
+
+    /**
+     * Responds to clicks on the extension's icon. Toggles TwitSpace enabledness
+     */
+    chrome.browserAction.onClicked.addListener(
+      function(tab) {
+        twitspaceOn = !twitspaceOn;
+        chrome.browserAction.setTitle({
+          title: twitspaceOn ? 'TwitSpace ENABLED' : 'TwitSpace disabled'
+        });
+        chrome.browserAction.setIcon({
+          path: twitspaceOn ? 'icon_ON.png' : 'icon_OFF.png'
+        });
+        chrome.tabs.update(tab.id, {url: tab.url, selected: tab.selected}, null);
+      }
+    );
+
+    /**
+     * Responds to requests from content_script.js for the status of the extension.
+     */
+    chrome.extension.onRequest.addListener(
+      function(request, sender, sendResponse) {
+        sendResponse({twitspaceOn: twitspaceOn});
+      }
+    );
+  </script>
+</body>
+
+</html>
