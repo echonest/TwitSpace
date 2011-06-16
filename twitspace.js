@@ -32,6 +32,11 @@ var songmp3;
             
             if (artist) {
               
+              // highlight text
+              var re = new RegExp(artist,"i");
+              $('.focused-stream-item .tweet-text').html($('.focused-stream-item .tweet-text').html().replace(re,function (matched) {return "<span class=\"highlight\">"+matched+"</span>";}));
+              
+              
               // playRandomSong(id);
               
               $.getJSON("http://ws.audioscrobbler.com/2.0/",

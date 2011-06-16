@@ -4,13 +4,17 @@
 .myspacerized .details-pane,
 body.narrow.myspacerized .details-pane-tweet,
 body.narrow.myspacerized .details-pane .pane-components-inner {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(255, 255, 255, 0) !important;
   -webkit-box-shadow: none;
   box-shadow: none !important;
 }
 
 .myspacerized .focused-stream-item {
   background: white !important;
+}
+
+.myspacerized .focused-stream-item .highlight {
+  background-color: yellow;
 }
 
 .myspacerized .details_image {
