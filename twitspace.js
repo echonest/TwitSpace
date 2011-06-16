@@ -12,7 +12,8 @@ var songmp3;
     console.log('clicked');
     var tweet_txt = $(this).find(".tweet-text").text();
     console.log(tweet_txt);
-    
+    audio = document.getElementById('audio');
+    if (audio) audio.src = ''; // stop playback
     if (twitspaceOn) {
         $.getJSON("http://developer.echonest.com/api/v4/artist/extract?callback=test",
           {
