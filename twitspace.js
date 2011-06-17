@@ -38,7 +38,7 @@ function ts_myspacifyTweet(tweet_txt) {
   ts_newAudio(false); // stop playback
   $.getJSON("http://developer.echonest.com/api/v4/artist/extract?callback=test",
     {
-      api_key: "N6E4NIOVYMTHNDM8J",
+      api_key: "UMQRZFZZHCAJX4HSQ",
       text: tweet_txt,
       results: 10,
       sort: "familiarity-desc",
@@ -98,7 +98,7 @@ function ts_myspacifyTweet(tweet_txt) {
 function ts_playRandomSong(id) {
   $.getJSON("http://developer.echonest.com/api/v4/song/search?callback=test&bucket=tracks&bucket=id:7digital",
       {
-        api_key: "N6E4NIOVYMTHNDM8J",
+        api_key: "UMQRZFZZHCAJX4HSQ",
         artist_id: id,
         results: 5,
         sort: "song_hotttnesss-desc",
