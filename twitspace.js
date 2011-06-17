@@ -6,7 +6,7 @@ $(function() {
       twitspaceOn = response.twitspaceOn;
   });
       
-  console.log('hello world');
+  //console.log('hello world');
   $('.stream-item-content').live('click', function() {
         ts_myspacifyTweet($(this).find(".tweet-text").text());
   });
@@ -19,7 +19,7 @@ $(function() {
 
 function ts_myspacifyPerma(tries) {
   var $permas = $('.permalink-tweet');
-  console.log("Permacheck "+tries);
+  //console.log("Permacheck "+tries);
       if ($permas.length) {
            ts_myspacifyTweet($permas.find(".tweet-text").text());
       }
@@ -33,8 +33,8 @@ function ts_myspacifyPerma(tries) {
   
 function ts_myspacifyTweet(tweet_txt) {
   if (!twitspaceOn) return false;
-  console.log('found tweet');
-  console.log(tweet_txt);
+  //console.log('found tweet');
+  //console.log(tweet_txt);
   ts_newAudio(false); // stop playback
   $.getJSON("http://developer.echonest.com/api/v4/artist/extract?callback=test",
     {
@@ -48,8 +48,8 @@ function ts_myspacifyTweet(tweet_txt) {
     function(data) {
       var artists = data.response.artists;
 
-      console.log(artists.length);
-      console.log(artists.length === 0);
+      //console.log(artists.length);
+      //console.log(artists.length === 0);
 
       if (artists.length === 0) {
         $('body').removeClass('myspacerized').css("background-image", "inherit");
@@ -57,12 +57,12 @@ function ts_myspacifyTweet(tweet_txt) {
       }
       
       var artist = data.response.artists[0].name;
-      console.log(artist);
-      console.log("----");
+      //console.log(artist);
+      //console.log("----");
       var id = data.response.artists[0].id;
 
       var image = "http://ws.audioscrobbler.com/2.0/?method=artist.getimageredirect&artist=" + encodeURI(artist) + "&api_key=b25b959554ed76058ac220b7b2e0a026&size=mega";
-      console.log(image);
+      //console.log(image);
       $('body').css("background", "url(" + image + ") center center repeat").addClass('myspacerized');
       
       // play that funky music
@@ -110,14 +110,14 @@ function ts_playRandomSong(id) {
             tries = 0;
             while (!songmp3 && tries <= data.response.songs.length) {
                 randomIndex = Math.floor(Math.random() * data.response.songs.length);
-                console.log("Picked random index "+randomIndex+" out of "+data.response.songs.length+" possible audio files");
+                //console.log("Picked random index "+randomIndex+" out of "+data.response.songs.length+" possible audio files");
                 theSong = data.response.songs[randomIndex];
                 if (theSong.tracks) {
                   songmp3 = theSong.tracks[0].preview_url;
                   ts_newAudio(songmp3);
                 }
                 else {
-                  console.log("No track for some reason");
+                  //console.log("No track for some reason");
                 }
               tries++;
             }
@@ -136,9 +136,9 @@ function ts_newAudio(mp3) {
     if (mp3) {
         audio.src = mp3;
         audio.play();
-        console.log("Loading/playing "+mp3);
+        //console.log("Loading/playing "+mp3);
     } else {
         audio.pause();
-        console.log("Stopped audio");
+        //console.log("Stopped audio");
     }
 }
