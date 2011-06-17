@@ -63,7 +63,7 @@ function ts_myspacifyTweet(tweet_txt) {
 
       var image = "http://ws.audioscrobbler.com/2.0/?method=artist.getimageredirect&artist=" + encodeURI(artist) + "&api_key=b25b959554ed76058ac220b7b2e0a026&size=mega";
       //console.log(image);
-      $('body').css("background", "url(" + image + ") center center repeat").addClass('myspacerized');
+      $('body').css("background-image", "url(" + image + ")").addClass('myspacerized');
       
       // play that funky music
       ts_playRandomSong(id);
