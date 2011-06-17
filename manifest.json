@@ -6,7 +6,7 @@
 		"http://developer.echonest.com/",
 		"http://ws.audioscrobbler.com/"
 	],
-  "version": "1.0",
+  "version": "0.1",
   "description": "Bring a bit of that ol' Myspace magic to any tweet that mentions a band/artist name.",
   "browser_action": {
     "default_icon": "icon_ON.png", 
@@ -19,5 +19,10 @@
       "js": ["jquery-1.6.1.min.js","twitspace.js"]
     }
   ],
-  "background_page": "background.html"
+  "background_page": "background.html",
+   "icons": { 
+		"16": "icon_16.png",
+        "48": "icon_48.png",
+        "128": "icon_128.png" 
+		}
 }
